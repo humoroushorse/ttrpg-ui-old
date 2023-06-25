@@ -98,3 +98,23 @@
   "bracketSpacing": true
 }
 ```
+
+## NgRx
+### Create host-dnd root store
+- `npx nx g @nx/angular:ngrx-root-store`
+  ✔ What app would you like to generate a NgRx configuration for? · host-dnd
+  ✔ Would you like to use a Facade with your NgRx state? (y/N) · false
+### Create shared/feature-users feature library
+- standalone, lazy routing
+- parent host-dnd just adds it as a route, future hosts have to manually add it
+- `npx nx g @nx/angular:lib feature-users --standalone --routing --lazy --parent=apps/host-dnd/src/app/app.routes.ts`
+
+### Add feature state to the shared/feature-users feature library
+- `npx nx g @nx/angular:ngrx users --parent=libs/feature-users/src/lib/lib.routes.ts --route=''`
+  ✔ Is this the root state of the application? (y/N) · false
+  ✔ Would you like to use a Facade with your NgRx state? (y/N) · false
+
+
+
+
+
