@@ -1,0 +1,10 @@
+{
+  "title": "host-dnd",
+  "apps": {
+    "mfe-spells": {
+      "api": {
+        "dndApi": "TODO: DnD API"
+      }
+    }
+  }
+}

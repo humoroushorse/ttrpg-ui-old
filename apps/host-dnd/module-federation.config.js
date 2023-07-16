@@ -1,4 +1,4 @@
 module.exports = {
   name: 'host-dnd',
-  remotes: ['mfe-login'],
+  remotes: ['mfe-spells'],
 };

@@ -17,7 +17,7 @@
 
 - `npx nx g @nx/angular:host host-dnd`
   ✔ Which stylesheet format would you like to use? · scss
-- `npx nx g @nx/angular:remote mfe-login --host=host-dnd`
+- `npx nx g @nx/angular:remote mfe-spells --host=host-dnd`
   ✔ Which stylesheet format would you like to use? · scss
 
 ## replicate npm scripts from another project
@@ -104,17 +104,30 @@
 - `npx nx g @nx/angular:ngrx-root-store`
   ✔ What app would you like to generate a NgRx configuration for? · host-dnd
   ✔ Would you like to use a Facade with your NgRx state? (y/N) · false
-### Create shared/feature-users feature library
-- standalone, lazy routing
-- parent host-dnd just adds it as a route, future hosts have to manually add it
-- `npx nx g @nx/angular:lib feature-users --standalone --routing --lazy --parent=apps/host-dnd/src/app/app.routes.ts`
+### Adding DevTooling
+- Following the guide for [NgRx Store DevTools](https://v7.ngrx.io/guide/store-devtools)
+- doing this for apps/host-dnd/src/app/app.module.ts
+  1. download the [Redux Devtools Extension](https://github.com/zalmoxisus/redux-devtools-extension/)
+  2. In your AppModule add instrumentation to the module imports using StoreDevtoolsModule.instrument:
+    ```javascript
+    import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+    import { environment } from '../environments/environment'; // Angular CLI environemnt
+    
+    @NgModule({
+      imports: [
+        StoreModule.forRoot(reducers),
+        // Instrumentation must be imported after importing StoreModule (config is optional)
+        StoreDevtoolsModule.instrument({
+          maxAge: 25, // Retains last 25 states
+          logOnly: environment.production, // Restrict extension to log-only mode
+        }),
+      ],
+    })
+    export class AppModule {}
+    ```
 
-### Add feature state to the shared/feature-users feature library
-- `npx nx g @nx/angular:ngrx users --parent=libs/feature-users/src/lib/lib.routes.ts --route=''`
-  ✔ Is this the root state of the application? (y/N) · false
-  ✔ Would you like to use a Facade with your NgRx state? (y/N) · false
-
-
-
-
+## adding core/auth routing lib (with NgRx)
+- follow the [AddingRoutingLib.md](./AddingRoutingLib.md) guide
+  - foobar = auth
+  - change the /core-auth route in host-dnd to /login
 

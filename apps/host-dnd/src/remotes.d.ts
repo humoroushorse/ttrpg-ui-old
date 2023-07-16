@@ -1,1 +1,1 @@
-declare module 'mfe-login/Module';
+declare module 'mfe-spells/Module';
