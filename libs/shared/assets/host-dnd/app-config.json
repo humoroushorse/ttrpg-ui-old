@@ -1,5 +1,14 @@
 {
   "title": "host-dnd",
+  "firebase": {
+    "apiKey": "AIzaSyClaHZWV0I3syEx5SrIL387XBD-hrTVoBs",
+    "authDomain": "dnd-fire-e5969.firebaseapp.com",
+    "projectId": "dnd-fire-e5969",
+    "storageBucket": "dnd-fire-e5969.appspot.com",
+    "messagingSenderId": "510768184967",
+    "appId": "1:510768184967:web:844bb0b43a4bba40694222",
+    "measurementId": "G-ZBF5PRKES5"
+  },
   "apps": {
     "mfe-spells": {
       "api": {

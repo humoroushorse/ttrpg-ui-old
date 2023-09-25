@@ -100,34 +100,38 @@
 ```
 
 ## NgRx
+
 ### Create host-dnd root store
+
 - `npx nx g @nx/angular:ngrx-root-store`
   ✔ What app would you like to generate a NgRx configuration for? · host-dnd
   ✔ Would you like to use a Facade with your NgRx state? (y/N) · false
+
 ### Adding DevTooling
+
 - Following the guide for [NgRx Store DevTools](https://v7.ngrx.io/guide/store-devtools)
 - doing this for apps/host-dnd/src/app/app.module.ts
+
   1. download the [Redux Devtools Extension](https://github.com/zalmoxisus/redux-devtools-extension/)
   2. In your AppModule add instrumentation to the module imports using StoreDevtoolsModule.instrument:
-    ```javascript
-    import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-    import { environment } from '../environments/environment'; // Angular CLI environemnt
-    
-    @NgModule({
-      imports: [
-        StoreModule.forRoot(reducers),
-        // Instrumentation must be imported after importing StoreModule (config is optional)
-        StoreDevtoolsModule.instrument({
-          maxAge: 25, // Retains last 25 states
-          logOnly: environment.production, // Restrict extension to log-only mode
-        }),
-      ],
-    })
-    export class AppModule {}
-    ```
+
+  ```javascript
+  import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+  import { environment } from '../environments/environment'; // Angular CLI environemnt
+
+  @NgModule({
+    imports: [
+      StoreModule.forRoot(reducers),
+      // Instrumentation must be imported after importing StoreModule (config is optional)
+      StoreDevtoolsModule.instrument({
+        maxAge: 25, // Retains last 25 states
+        logOnly: environment.production, // Restrict extension to log-only mode
+      }),
+    ],
+  })
+  export class AppModule {}
+  ```
 
 ## adding core/auth routing lib (with NgRx)
-- follow the [AddingRoutingLib.md](./AddingRoutingLib.md) guide
-  - foobar = auth
-  - change the /core-auth route in host-dnd to /login
 
+- see [Firebase.md](./Firebase.md)

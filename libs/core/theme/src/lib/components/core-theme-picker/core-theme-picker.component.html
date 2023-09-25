@@ -1,0 +1,21 @@
+<button mat-raised-button color="primary" aria-label="Paint Can" [matMenuTriggerFor]="themeMenu">
+  <mat-icon aria-label="Paint Can"> format_color_fill </mat-icon>
+  Choose Theme
+</button>
+
+<mat-menu #themeMenu="matMenu" style="width: 100%">
+  <div
+    *ngFor="let t of allThemes$ | async"
+    mat-menu-item
+    tabindex="0"
+    (click)="pickTheme(t)"
+    (keydown)="eventPickTheme($event, t)"
+    (mouseenter)="setTempColor(t)"
+    (mouseleave)="removeTempColor()"
+    [ngClass]="{
+      'primary-background': activeTheme$.value.theme === t.theme
+    }"
+  >
+    {{ t.viewValue }}
+  </div>
+</mat-menu>

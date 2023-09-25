@@ -6,4 +6,4 @@ export * from './lib/+state/user.actions';
 export * from './lib/core-auth.module';
 export * from './lib/lib.routes';
 
-export * from './lib/lib.routes';
+export { CoreAuthService } from './lib/data-access/core-auth.service';

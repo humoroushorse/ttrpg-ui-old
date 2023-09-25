@@ -1,12 +1,12 @@
 /**
  * Interface for the 'User' data
  */
-export interface UserEntity {
+export interface IUserEntity {
   // id: string | number; // Primary ID
   // name: string;
   uid: string;
-  email: string;
-  displayName: string;
-  photoURL: string;
   emailVerified: boolean;
+  email: string | null;
+  displayName: string | null;
+  photoURL: string | null;
 }

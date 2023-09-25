@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule, isDevMode } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -7,17 +7,15 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { ConfigLoaderModels, CoreConfigLoaderService } from '@ttrpg-ui/core/config-loader';
-
-export function initConfig(configService: CoreConfigLoaderService) {
-  // load the config file in this function
-  return () => configService.init(ConfigLoaderModels.AppConfigsEnum.HOST_DND);
-}
+import { CoreAuthModule } from '@ttrpg-ui/core/auth';
+import { AppLayoutComponent } from './pages/app-layout/app-layout.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
     StoreModule.forRoot(
       {},
@@ -35,15 +33,10 @@ export function initConfig(configService: CoreConfigLoaderService) {
     }),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
+    CoreAuthModule,
+    AppLayoutComponent,
   ],
-  providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initConfig,
-      deps: [CoreConfigLoaderService],
-      multi: true,
-    },
-  ],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

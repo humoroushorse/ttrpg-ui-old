@@ -1,0 +1,19 @@
+:host {
+  height: 100%;
+}
+
+.full-height,
+.example-sidenav-container {
+  height: 100%;
+}
+
+.user-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+
+  .mat-mdc-card-avatar {
+    margin: 0;
+  }
+}

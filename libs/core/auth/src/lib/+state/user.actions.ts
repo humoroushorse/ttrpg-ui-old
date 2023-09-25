@@ -1,8 +1,24 @@
-import { createAction, props } from '@ngrx/store';
-import { UserEntity } from './user.models';
+import { props, createActionGroup, emptyProps } from '@ngrx/store';
+import { IUserEntity } from './user.models';
 
-export const initUser = createAction('[User Page] Init');
+export const AuthApiActions = createActionGroup({
+  source: 'User/API',
+  events: {
+    'Google Login User Success': emptyProps(),
+    'Google Login User Failure': props<{ error: any }>(),
+    'Logout User Success': emptyProps(),
+    'Logout User Failure': props<{ error: any }>(),
+  },
+});
 
-export const loadUserSuccess = createAction('[User/API] Load User Success', props<{ user: UserEntity[] }>());
-
-export const loadUserFailure = createAction('[User/API] Load User Failure', props<{ error: any }>());
+export const AuthActions = createActionGroup({
+  source: 'Auth',
+  events: {
+    Logout: emptyProps(),
+    'Google Login': emptyProps(),
+    'Get User': emptyProps(),
+    'User Authenticated': props<{ user: IUserEntity }>(),
+    'User Not Authenticated': emptyProps(),
+    'Auth Error': props<{ error: any }>(),
+  },
+});

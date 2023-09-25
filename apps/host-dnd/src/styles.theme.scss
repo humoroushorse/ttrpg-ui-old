@@ -1,0 +1,68 @@
+/* You can add global styles to this file, and also import other style files */
+
+// @use '../../../libs/shared/themes/buttons-theme' as buttons-theme;
+// @use '../../../libs/shared/themes/dnd.theme.scss' as dnd-theme;
+@use './scss/dnd.theme.scss' as dnd-theme;
+@use './scss/global-colors.scss' as global-colors;
+
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+@mixin custom-component-themes($theme) {
+  // Angular Material
+  @include mat.all-component-themes($theme);
+
+  // Custom
+  // @include your-therme-here($theme);
+  @include global-colors.color($theme);
+}
+
+// #############################################################################
+// DND LIGHT THEME
+// #############################################################################
+
+$dnd-light-primary: mat.define-palette(dnd-theme.$primary-light, 700, 400, 900);
+$dnd-light-accent: mat.define-palette(dnd-theme.$accent-light, 500, 300, 800);
+$dnd-light-warn: mat.define-palette(dnd-theme.$warn-light, 500, 300, 700);
+
+$dnd-light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $dnd-light-primary,
+      accent: $dnd-light-accent,
+      warn: $dnd-light-warn,
+    ),
+    // typography: dnd-theme.$typography-config,
+    density: 0,
+  )
+);
+.dnd-light-theme {
+  @include custom-component-themes($dnd-light-theme);
+}
+
+// #############################################################################
+// DND DARK THEME
+// #############################################################################
+
+$dnd-dark-primary: mat.define-palette(dnd-theme.$primary-dark, 300, 100, 500);
+$dnd-dark-accent: mat.define-palette(dnd-theme.$accent-dark, 300, 100, 500);
+$dnd-dark-warn: mat.define-palette(dnd-theme.$warn-dark, 300, 300, 700);
+
+$dnd-dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $dnd-dark-primary,
+      accent: $dnd-dark-accent,
+      warn: $dnd-dark-warn,
+    ),
+    // typography: dnd-theme.$typography-config,
+    density: 0,
+  )
+);
+.dnd-dark-theme {
+  @include custom-component-themes($dnd-dark-theme);
+}
+
+// DEFAULT________________________________________________________
+// @include angular-material-theme($dnd-light-theme);

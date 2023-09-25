@@ -1,0 +1,50 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@mixin color($theme) {
+  $color-config: mat.get-color-config($theme);
+  $primary: map.get($color-config, primary);
+  $accent: map.get($color-config, accent);
+  $warn: map.get($color-config, warn);
+
+  $background: map.get($color-config, foreground);
+
+  // primary
+  .primary-color {
+    color: mat.get-color-from-palette($primary);
+  }
+  .primary-text {
+    color: mat.get-color-from-palette($primary, 'default-contrast');
+  }
+  .primary-background {
+    background: mat.get-color-from-palette($primary);
+    color: mat.get-color-from-palette($primary, 'default-contrast');
+  }
+
+  // accent
+  .accent-color {
+    color: mat.get-color-from-palette($accent);
+  }
+  .accent-text {
+    color: mat.get-color-from-palette($accent, 'default-contrast');
+  }
+  .accent-background {
+    background: mat.get-color-from-palette($accent);
+    color: mat.get-color-from-palette($accent, 'default-contrast');
+  }
+
+  // warn
+  .warn-color {
+    color: mat.get-color-from-palette($warn);
+  }
+  .warn-color-i {
+    color: mat.get-color-from-palette($warn) !important;
+  }
+  .warn-text {
+    color: mat.get-color-from-palette($warn, 'default-contrast');
+  }
+  .warn-background {
+    background: mat.get-color-from-palette($warn);
+    color: mat.get-color-from-palette($warn, 'default-contrast');
+  }
+}
