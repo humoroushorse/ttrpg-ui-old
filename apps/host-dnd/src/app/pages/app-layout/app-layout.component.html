@@ -1,0 +1,52 @@
+<div [ngClass]="activeTheme$.value.theme" class="mat-app-background full-height">
+  <mat-toolbar color="primary">
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with menu icon"
+      (click)="snav.toggle()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span routerLink="." class="clickable">{{ appTitle }}</span>
+    <span class="spacer"></span>
+    <ng-container *ngIf="user$ | async as user; else noUser">
+      <div class="clickable user-button" [matMenuTriggerFor]="userMenu">
+        <mat-card style="display: none"></mat-card>
+        <img mat-card-avatar src="{{ user.photoURL }}" />
+        <div>{{ user.displayName }}</div>
+      </div>
+    </ng-container>
+    <ng-template #noUser>
+      <button mat-button type="button" routerLink="login">Login</button>
+    </ng-template>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav #snav [mode]="'over'">
+      <mat-list>
+        <mat-list-item
+          *ngFor="let snavLink of sidenavLinks; trackBy: trackByDisplayText"
+          class="clickable"
+          routerLink="{{ snavLink.link }}"
+          [routerLinkActiveOptions]="{ exact: false }"
+          routerLinkActive="primary-background"
+        >
+          {{ snavLink.displayText }}
+        </mat-list-item>
+      </mat-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <pre><code>{{activeTheme$ | json}}</code></pre>
+
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+<mat-menu #userMenu="matMenu">
+  <!-- <ttrpg-ui-core-theme-picker></ttrpg-ui-core-theme-picker> -->
+  <ttrpg-ui-core-theme-toggle [stopPropagation]="true"></ttrpg-ui-core-theme-toggle>
+  <button type="button" color="warn" mat-menu-item (click)="logout()">Logout</button>
+</mat-menu>

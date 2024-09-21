@@ -1,0 +1,114 @@
+{
+  "name": "host-dnd",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "ttrpg-ui",
+  "sourceRoot": "apps/host-dnd/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/host-dnd",
+        "index": "apps/host-dnd/src/index.html",
+        "main": "apps/host-dnd/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/host-dnd/tsconfig.app.json",
+        "assets": [
+          "apps/host-dnd/src/favicon.ico",
+          "apps/host-dnd/src/assets",
+          {
+            "glob": "**/*",
+            "input": "./libs/shared/assets/",
+            "output": "./assets"
+          }
+        ],
+        "styles": ["apps/host-dnd/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/host-dnd/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/host-dnd/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nx/angular:module-federation-dev-server",
+      "options": {
+        "port": 4200,
+        "publicHost": "http://localhost:4200"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "host-dnd:build:production"
+        },
+        "development": {
+          "browserTarget": "host-dnd:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "host-dnd:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/host-dnd/**/*.ts", "apps/host-dnd/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/host-dnd/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "host-dnd:build",
+        "port": 4200
+      }
+    }
+  }
+}

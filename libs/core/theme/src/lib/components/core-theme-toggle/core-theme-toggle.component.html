@@ -1,0 +1,10 @@
+<div>
+  <mat-slide-toggle
+    [checked]="isDark$.value"
+    (change)="toggleDarkMode()"
+    (click)="handleClick($event)"
+    [matTooltip]="isDark$.value ? 'Set Light Mode' : 'Set Dark Mode'"
+  >
+    {{ isDark$.value ? 'Dark' : 'Light' }} Mode
+  </mat-slide-toggle>
+</div>
